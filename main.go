@@ -19,14 +19,6 @@ func TokenMove() {
 
 }
 
-func gameHandler(w http.ResponseWriter, r *http.Request) {
-
-}
-
-func resetHandler(w http.ResponseWriter, r *http.Request) {
-
-}
-
 var game *internal.Game
 
 func main() {
@@ -34,7 +26,7 @@ func main() {
 
 	http.HandleFunc("/", internal.StartHandler)
 	//http.HandleFunc("/", gameHandler)
-	//http.HandleFunc("/game", gameHandler)
+	http.HandleFunc("/game", internal.GameHandler)
 	//http.HandleFunc("/reset", resetHandler)
 
 	http.HandleFunc("/play", func(w http.ResponseWriter, r *http.Request) {
