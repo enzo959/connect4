@@ -29,6 +29,10 @@ func Full() {
 
 }
 
+func CheckWin() {
+
+}
+
 func startHandler(w http.ResponseWriter, r *http.Request) {
 
 }
