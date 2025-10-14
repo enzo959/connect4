@@ -13,12 +13,24 @@ type StartPageData struct {
 	Color2Value  string
 }
 
+type GamePageData struct {
+	Grid [][]string
+}
+
 func resetHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func gameHandler(w http.ResponseWriter, r *http.Request) {
+func GameHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl, err := template.ParseFiles("templates/game.html")
+	if err != nil {
+		http.Error(w, "Erreur chargement game.html", http.StatusInternalServerError)
+		return
+	}
 
+	game := NewGame() // pour l’instant une grille vide 6x7
+	data := GamePageData{Grid: game.Grid}
+	tmpl.Execute(w, data)
 }
 
 // Affiche le formulaire d'accueil
@@ -30,20 +42,7 @@ func StartHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method == http.MethodPost {
-		player1 := r.FormValue("player1")
-		player2 := r.FormValue("player2")
-		color1 := r.FormValue("color1")
-		color2 := r.FormValue("color2")
-
-		data := StartPageData{
-			Message:      "Configuration reçue (fonctionnalité à venir)",
-			Player1Value: player1,
-			Player2Value: player2,
-			Color1Value:  color1,
-			Color2Value:  color2,
-		}
-
-		tmpl.Execute(w, data)
+		http.Redirect(w, r, "/game", http.StatusSeeOther)
 		return
 	}
 
