@@ -22,14 +22,14 @@ func NewGrid(rows, cols int) [][]string {
 	return grid
 }
 
-func NewGame(rows, cols int) *Game {
+func NewGame() *Game {
 	return &Game{
-		Player1Name:   "",
-		Player2Name:   "",
-		Player1Color:  "",
-		Player2Color:  "",
+		PlayerName1:   "",
+		PlayerName2:   "",
+		PlayerColor1:  "",
+		PlayerColor2:  "",
 		CurrentPlayer: "",
-		Grid:          NewGrid(rows, cols),
+		Grid:          NewGrid(6, 7),
 		Winner:        "",
 	}
 }
