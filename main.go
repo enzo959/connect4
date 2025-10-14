@@ -16,6 +16,15 @@ type Game struct {
 	Winner        string
 }
 
+type StartPageData struct {
+	Message      string
+	Error        string
+	Player1Value string
+	Player2Value string
+	Color1Value  string
+	Color2Value  string
+}
+
 // Creat grid
 func NewGrid(rows, cols int) [][]string {
 	grid := make([][]string, rows)
@@ -46,7 +55,25 @@ func startHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Erreur template", http.StatusInternalServerError)
 		return
 	}
-	tmpl.Execute(w, nil)
+	if r.Method == http.MethodGet {
+		data := StartPageData{}
+		tmpl.Execute(w, data)
+		return
+	}
+
+	player1 := r.FormValue("player1")
+	player2 := r.FormValue("player2")
+	color1 := r.FormValue("color1")
+	color2 := r.FormValue("color2")
+
+	data := StartPageData{
+		Message:      "Configuration reçue (fonctionnalité à venir)",
+		Player1Value: player1,
+		Player2Value: player2,
+		Color1Value:  color1,
+		Color2Value:  color2,
+	}
+	tmpl.Execute(w, data)
 }
 
 func gameHandler(w http.ResponseWriter, r *http.Request) {
