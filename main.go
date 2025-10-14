@@ -14,6 +14,17 @@ type Game struct {
 	Winner        string
 }
 
+func NewGrid(rows, cols int) [][]string {
+	grid := make([][]string, rows)
+	for i := 0; i < rows; i++ {
+		grid[i] = make([]string, cols)
+		for j := 0; j < cols; j++ {
+			grid[i][j] = ""
+		}
+	}
+	return grid
+}
+
 func startHandler(w http.ResponseWriter, r *http.Request) {
 
 }
