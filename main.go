@@ -25,7 +25,7 @@ func NewGrid(rows, cols int) [][]string {
 	return grid
 }
 
-func Full() {
+func FullGrid() {
 
 }
 
