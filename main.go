@@ -6,16 +6,6 @@ import (
 	"text/template"
 )
 
-type Game struct {
-	PlayerName1   string
-	PlayerName2   string
-	CurrentPlayer string
-	PlayerColor1  string
-	PlayerColor2  string
-	Grid          [][]string
-	Winner        string
-}
-
 type StartPageData struct {
 	Message      string
 	Error        string
@@ -23,18 +13,6 @@ type StartPageData struct {
 	Player2Value string
 	Color1Value  string
 	Color2Value  string
-}
-
-// Creat grid
-func NewGrid(rows, cols int) [][]string {
-	grid := make([][]string, rows)
-	for i := 0; i < rows; i++ {
-		grid[i] = make([]string, cols)
-		for j := 0; j < cols; j++ {
-			grid[i][j] = ""
-		}
-	}
-	return grid
 }
 
 func FullGrid() {
