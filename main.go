@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"text/template"
 )
 
 type Game struct {
@@ -40,7 +41,12 @@ func TokenMove() {
 }
 
 func startHandler(w http.ResponseWriter, r *http.Request) {
-
+	tmpl, err := template.ParseFiles("templates/start.html")
+	if err != nil {
+		http.Error(w, "Erreur template", http.StatusInternalServerError)
+		return
+	}
+	tmpl.Execute(w, nil)
 }
 
 func gameHandler(w http.ResponseWriter, r *http.Request) {
