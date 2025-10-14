@@ -25,6 +25,10 @@ func NewGrid(rows, cols int) [][]string {
 	return grid
 }
 
+func Full() {
+
+}
+
 func startHandler(w http.ResponseWriter, r *http.Request) {
 
 }
