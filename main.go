@@ -11,9 +11,11 @@ type Game struct {
 	CurrentPlayer string
 	PlayerColor1  string
 	PlayerColor2  string
+	Grid          [][]string
 	Winner        string
 }
 
+// Creat grid
 func NewGrid(rows, cols int) [][]string {
 	grid := make([][]string, rows)
 	for i := 0; i < rows; i++ {
