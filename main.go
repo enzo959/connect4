@@ -5,6 +5,15 @@ import (
 	"net/http"
 )
 
+type Game struct {
+	PlayerName1   string
+	PlayerName2   string
+	CurrentPlayer string
+	PlayerColor1  string
+	PlayerColor2  string
+	Winner        string
+}
+
 func startHandler(w http.ResponseWriter, r *http.Request) {
 
 }
