@@ -33,6 +33,10 @@ func CheckWin() {
 
 }
 
+func TokenMove() {
+
+}
+
 func startHandler(w http.ResponseWriter, r *http.Request) {
 
 }
