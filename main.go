@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Power4/internal"
 	"log"
 	"net/http"
 	"text/template"
@@ -62,7 +63,11 @@ func resetHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+var game *internal.Game
+
 func main() {
+	game = internal.NewGame()
+
 	http.HandleFunc("/", startHandler)
 	http.HandleFunc("/game", gameHandler)
 	http.HandleFunc("/reset", resetHandler)
