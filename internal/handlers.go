@@ -63,6 +63,8 @@ func StartHandler(w http.ResponseWriter, r *http.Request) {
 		GameInstance.PlayerColor2 = color2
 		GameInstance.CurrentPlayer = player1
 
+		GameInstance.Grid = NewGrid(6, 7)
+
 		http.Redirect(w, r, "/game", http.StatusSeeOther)
 		return
 	}
