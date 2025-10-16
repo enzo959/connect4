@@ -24,9 +24,7 @@ func main() {
 	internal.GameInstance = internal.NewGame()
 
 	http.HandleFunc("/", internal.StartHandler)
-	//http.HandleFunc("/", gameHandler)
 	http.HandleFunc("/game", internal.GameHandler)
-	//http.HandleFunc("/reset", resetHandler)
 
 	log.Println("Serveur lancé sur http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
