@@ -10,6 +10,8 @@ type Game struct {
 	Winner        string
 }
 
+var GameInstance *Game
+
 // Creat grid
 func NewGrid(rows, cols int) [][]string {
 	grid := make([][]string, rows)
