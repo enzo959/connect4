@@ -2,10 +2,41 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Puissance 4 - Menu</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Puissance 4 - Plateau</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        table, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h1>Game</h1>
+    <h1>Puissance 4</h1>
+
+    <div class="info">
+        <strong>Joueur 1 :</strong> {{.PlayerName1}} ({{.PlayerColor1}}) <br>
+        <strong>Joueur 2 :</strong> {{.PlayerName2}} ({{.PlayerColor2}}) <br>
+        <strong>Au tour de :</strong> {{.CurrentPlayer}}
+    </div>
+
+    <!-- Grille -->
+    <table>
+        {{range .Grid}}
+        <tr>
+            {{range .}}
+                {{if eq . ""}}
+                    <td></td>
+                {{else}}
+                    <td class="{{.}}"></td>
+                {{end}}
+            {{end}}
+        </tr>
+        {{end}}
+    </table>
 </body>
 </html>
+
