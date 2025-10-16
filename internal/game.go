@@ -35,3 +35,15 @@ func NewGame() *Game {
 		Winner:        "",
 	}
 }
+
+func FullGrid() {
+
+}
+
+func CheckWin() {
+
+}
+
+func TokenMove() {
+
+}
