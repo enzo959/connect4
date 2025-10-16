@@ -7,18 +7,20 @@ import (
 
 type StartPageData struct {
 	Message      string
-	Player1Value string
-	Player2Value string
-	Color1Value  string
-	Color2Value  string
+	PlayerValue1 string
+	PlayerValue2 string
+	ColorValue1  string
+	ColorValue2  string
 }
 
 type GamePageData struct {
-	Grid [][]string
-}
-
-func resetHandler(w http.ResponseWriter, r *http.Request) {
-
+	Grid          [][]string
+	PlayerName1   string
+	PlayerName2   string
+	PlayerColor1  string
+	PlayerColor2  string
+	CurrentPlayer string
+	Winner        string
 }
 
 func GameHandler(w http.ResponseWriter, r *http.Request) {
@@ -28,8 +30,16 @@ func GameHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	game := NewGame() // pour l’instant une grille vide 6x7
-	data := GamePageData{Grid: game.Grid}
+	data := GamePageData{
+		Grid:          GameInstance.Grid,
+		PlayerName1:   GameInstance.PlayerName1,
+		PlayerName2:   GameInstance.PlayerName2,
+		PlayerColor1:  GameInstance.PlayerColor1,
+		PlayerColor2:  GameInstance.PlayerColor2,
+		CurrentPlayer: GameInstance.CurrentPlayer,
+		Winner:        GameInstance.Winner,
+	}
+
 	tmpl.Execute(w, data)
 }
 
@@ -42,6 +52,17 @@ func StartHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method == http.MethodPost {
+		player1 := r.FormValue("player1")
+		player2 := r.FormValue("player2")
+		color1 := r.FormValue("color1")
+		color2 := r.FormValue("color2")
+
+		GameInstance.PlayerName1 = player1
+		GameInstance.PlayerName2 = player2
+		GameInstance.PlayerColor1 = color1
+		GameInstance.PlayerColor2 = color2
+		GameInstance.CurrentPlayer = player1
+
 		http.Redirect(w, r, "/game", http.StatusSeeOther)
 		return
 	}
