@@ -29,14 +29,13 @@
         <strong>Au tour de :</strong> {{.CurrentPlayer}}
     </div>
 
+    {{if not .Winner}}
     <div class="columns">
         {{range $i, $col := index .Grid 0}}
             <a class="col-btn" href="/play?col={{$i}}">⮟</a>
         {{end}}
     </div>
 
-
-    <!-- Grille -->
     <table>
         {{range .Grid}}
         <tr>
@@ -50,6 +49,8 @@
         </tr>
         {{end}}
     </table>
+    {{end}}
+
 </body>
 </html>
 
