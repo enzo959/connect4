@@ -22,6 +22,9 @@ type GamePageData struct {
 	PlayerColor2  string
 	CurrentPlayer string
 	Winner        string
+	WinsPlayer1   int
+	WinsPlayer2   int
+	Draws         int
 }
 
 func GameHandler(w http.ResponseWriter, r *http.Request) {
