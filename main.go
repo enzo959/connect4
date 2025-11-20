@@ -6,23 +6,12 @@ import (
 	"net/http"
 )
 
-func FullGrid() {
-
-}
-
-func CheckWin() {
-
-}
-
-func TokenMove() {
-
-}
-
 func main() {
 	internal.GameInstance = internal.NewGame()
 
 	http.HandleFunc("/", internal.StartHandler)
 	http.HandleFunc("/game", internal.GameHandler)
+	http.HandleFunc("/play", internal.PlayHandler)
 
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
