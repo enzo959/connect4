@@ -70,9 +70,6 @@ func StartHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Réinitialiser la partie
-	GameInstance = NewGame()
-
 	tmpl.Execute(w, StartPageData{})
 }
 
