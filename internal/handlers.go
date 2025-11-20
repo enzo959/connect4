@@ -42,6 +42,9 @@ func GameHandler(w http.ResponseWriter, r *http.Request) {
 		PlayerColor2:  GameInstance.PlayerColor2,
 		CurrentPlayer: GameInstance.CurrentPlayer,
 		Winner:        GameInstance.Winner,
+		WinsPlayer1:   GameStats.WinsPlayer1,
+		WinsPlayer2:   GameStats.WinsPlayer2,
+		Draws:         GameStats.Draws,
 	}
 
 	tmpl.Execute(w, data)
