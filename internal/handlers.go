@@ -58,6 +58,25 @@ func StartHandler(w http.ResponseWriter, r *http.Request) {
 		color1 := r.FormValue("color1")
 		color2 := r.FormValue("color2")
 
+		var message string
+		if player1 == player2 {
+			message = "Les deux joueurs ne peuvent pas avoir le même nom."
+		} else if color1 == color2 {
+			message = "Les deux joueurs ne peuvent pas choisir la même couleur."
+		}
+
+		if message != "" {
+			// Affiche le formulaire avec le message d'erreur et valeurs déjà saisies
+			tmpl.Execute(w, StartPageData{
+				Message:      message,
+				PlayerValue1: player1,
+				PlayerValue2: player2,
+				ColorValue1:  color1,
+				ColorValue2:  color2,
+			})
+			return
+		}
+
 		GameInstance = NewGame()
 		GameInstance.PlayerName1 = player1
 		GameInstance.PlayerName2 = player2
