@@ -3,6 +3,7 @@ package internal
 import (
 	"html/template"
 	"net/http"
+	"strconv"
 )
 
 type StartPageData struct {
@@ -70,4 +71,17 @@ func StartHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tmpl.Execute(w, StartPageData{})
+}
+
+func PlayHandler(w http.ResponseWriter, r *http.Request) {
+	colStr := r.URL.Query().Get("col")
+	col, err := strconv.Atoi(colStr)
+	if err != nil {
+		http.Error(w, "Colonne invalide", http.StatusBadRequest)
+		return
+	}
+
+	GameInstance.PlayMove(col)
+
+	http.Redirect(w, r, "/game", http.StatusSeeOther)
 }
