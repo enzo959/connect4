@@ -58,12 +58,16 @@ func StartHandler(w http.ResponseWriter, r *http.Request) {
 		color1 := r.FormValue("color1")
 		color2 := r.FormValue("color2")
 
+		// Si GameInstance a été reset, on recrée
+		if GameInstance == nil {
+			GameInstance = NewGame()
+		}
+
 		GameInstance.PlayerName1 = player1
 		GameInstance.PlayerName2 = player2
 		GameInstance.PlayerColor1 = color1
 		GameInstance.PlayerColor2 = color2
 		GameInstance.CurrentPlayer = player1
-
 		GameInstance.Grid = NewGrid(6, 7)
 
 		http.Redirect(w, r, "/game", http.StatusSeeOther)
@@ -88,6 +92,5 @@ func PlayHandler(w http.ResponseWriter, r *http.Request) {
 
 // ResetHandler réinitialise la partie et redirige vers le formulaire d'accueil
 func ResetHandler(w http.ResponseWriter, r *http.Request) {
-	GameInstance = NewGame()                      // réinitialise la partie
-	http.Redirect(w, r, "/", http.StatusSeeOther) // renvoie vers la page d'accueil
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
