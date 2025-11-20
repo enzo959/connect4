@@ -58,11 +58,6 @@ func StartHandler(w http.ResponseWriter, r *http.Request) {
 		color1 := r.FormValue("color1")
 		color2 := r.FormValue("color2")
 
-		// Si GameInstance a été reset, on recrée
-		if GameInstance == nil {
-			GameInstance = NewGame()
-		}
-
 		GameInstance.PlayerName1 = player1
 		GameInstance.PlayerName2 = player2
 		GameInstance.PlayerColor1 = color1
