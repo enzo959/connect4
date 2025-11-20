@@ -131,24 +131,20 @@ func (g *Game) PlayMove(col int) {
 
 			// vérifier victoire
 			if g.CheckWinner() {
+				switch g.Winner {
+				case g.PlayerName1:
+					GameStats.WinsPlayer1++
+				case g.PlayerName2:
+					GameStats.WinsPlayer2++
+				}
 				return
 			}
 
 			// grille pleine => match nul
 			if g.IsFull() {
 				g.Winner = "draw"
+				GameStats.Draws++
 				return
-			}
-
-			if g.CheckWinner() || g.IsFull() {
-				switch g.Winner {
-				case g.PlayerName1:
-					GameStats.WinsPlayer1++
-				case g.PlayerName2:
-					GameStats.WinsPlayer2++
-				case "draw":
-					GameStats.Draws++
-				}
 			}
 
 			// changer le joueur
