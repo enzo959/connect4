@@ -12,6 +12,14 @@ type Game struct {
 
 var GameInstance *Game
 
+type Stats struct {
+	WinsPlayer1 int
+	WinsPlayer2 int
+	Draws       int
+}
+
+var GameStats = &Stats{} // statistiques pour la partie actuelle
+
 // Creat grid
 func NewGrid(rows, cols int) [][]string {
 	grid := make([][]string, rows)
