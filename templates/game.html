@@ -17,8 +17,10 @@
             {{end}}
         </h2>
 
-        <a href="/reset" class="restart-btn">🔁 Rejouer</a>
-
+        <div class="buttons">
+            <a href="/reset-grid" class="btn">Rejouer une manche</a>
+            <a href="/reset" class="restart-btn">Rejouer avec d'aures joueur</a>
+        </div>
 
     {{end}}
 
@@ -28,7 +30,7 @@
         <strong>Joueur 2 :</strong> {{.PlayerName2}} ({{.PlayerColor2}}) <br>
         <strong>Au tour de :</strong> {{.CurrentPlayer}}
     </div>
-    
+
     <div class="stats">
         <p>Victoires {{.PlayerName1}} : {{.WinsPlayer1}}</p>
         <p>Victoires {{.PlayerName2}} : {{.WinsPlayer2}}</p>
