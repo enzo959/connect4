@@ -70,6 +70,9 @@ func StartHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Réinitialiser la partie
+	GameInstance = NewGame()
+
 	tmpl.Execute(w, StartPageData{})
 }
 
@@ -84,4 +87,10 @@ func PlayHandler(w http.ResponseWriter, r *http.Request) {
 	GameInstance.PlayMove(col)
 
 	http.Redirect(w, r, "/game", http.StatusSeeOther)
+}
+
+// ResetHandler réinitialise la partie et redirige vers le formulaire d'accueil
+func ResetHandler(w http.ResponseWriter, r *http.Request) {
+	GameInstance = NewGame()                      // réinitialise la partie
+	http.Redirect(w, r, "/", http.StatusSeeOther) // renvoie vers la page d'accueil
 }
