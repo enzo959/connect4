@@ -8,6 +8,13 @@
 <body>
     <h1>Puissance 4</h1>
     <form method="POST" action="/">
+        <label>
+            <input type="radio" name="mode" value="pvp" checked> Joueur vs Joueur
+        </label>
+        <label>
+            <input type="radio" name="mode" value="solo"> Joueur vs Ordinateur
+        </label>
+
         <label>Nom Joueur 1 :</label>
         <input type="text" name="player1" value="{{.PlayerValue1}}" required><br>
 
