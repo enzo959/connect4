@@ -40,19 +40,6 @@
 
     {{if and .PlayerName1 .PlayerName2 (not .Winner)}}
     <table class="board">
-        <thead>
-            <tr>
-                {{range $i, $col := index .Grid 0}}
-                <th class="col-header">
-                    <form method="POST" action="/play">
-                        <input type="hidden" name="col" value="{{$i}}">
-                        <button type="submit" class="col-btn" aria-label="Jouer colonne {{$i}}">⮟</button>
-                    </form>
-                </th>
-                {{end}}
-            </tr>
-        </thead>
-
         <tbody>
             {{range $rIndex, $row := .Grid}}
             <tr>
