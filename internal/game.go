@@ -88,11 +88,12 @@ func (g *Game) CheckWinner() bool {
 				for nr >= 0 && nr < rows && nc >= 0 && nc < cols && g.Grid[nr][nc] == color {
 					count++
 					if count == 4 {
-						if color == g.PlayerColor1 {
+						switch color {
+						case g.PlayerColor1:
 							g.Winner = g.PlayerName1
-						} else if color == g.PlayerColor2 {
+						case g.PlayerColor2:
 							g.Winner = g.PlayerName2
-						} else {
+						default:
 							g.Winner = "Inconnu"
 						}
 						return true
@@ -141,7 +142,7 @@ func (g *Game) PlayMove(col int) {
 				return
 			}
 
-			// grille pleine => match nul
+			// grille pleine -> match nul
 			if g.IsFull() {
 				g.Winner = "draw"
 				GameStats.Draws++
@@ -159,7 +160,6 @@ func (g *Game) PlayMove(col int) {
 		}
 	}
 
-	// colonne pleine -> on ne fait rien
 }
 
 func (g *Game) AIMove() {
