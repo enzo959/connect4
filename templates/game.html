@@ -39,26 +39,38 @@
 
 
     {{if and .PlayerName1 .PlayerName2 (not .Winner)}}
-    <div class="columns">
-        {{range $i, $col := index .Grid 0}}
-            <a class="col-btn" href="/play?col={{$i}}">⮟</a>
-        {{end}}
-    </div>
-
-    <table>
-        {{range .Grid}}
-        <tr>
-            {{range .}}
-                {{if eq . ""}}
-                    <td></td>
-                {{else}}
-                    <td class="{{.}}"></td>
+    <table class="board">
+        <thead>
+            <tr>
+                {{range $i, $col := index .Grid 0}}
+                <th class="col-header">
+                    <form method="POST" action="/play">
+                        <input type="hidden" name="col" value="{{$i}}">
+                        <button type="submit" class="col-btn" aria-label="Jouer colonne {{$i}}">⮟</button>
+                    </form>
+                </th>
                 {{end}}
+            </tr>
+        </thead>
+
+        <tbody>
+            {{range $rIndex, $row := .Grid}}
+            <tr>
+                {{range $cIndex, $cell := $row}}
+                    {{if eq $cell ""}}
+                        <td class="cell empty">
+                            <a href="/play?col={{$cIndex}}" class="cell-click"></a>
+                        </td>
+                    {{else}}
+                        <td class="cell {{ $cell }}"></td>
+                    {{end}}
+                {{end}}
+            </tr>
             {{end}}
-        </tr>
-        {{end}}
+        </tbody>
     </table>
     {{end}}
+
 
 </body>
 </html>
