@@ -99,7 +99,17 @@ func StartHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func PlayHandler(w http.ResponseWriter, r *http.Request) {
-	colStr := r.URL.Query().Get("col")
+	var colStr string
+	if r.Method == http.MethodPost {
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "Erreur lecture formulaire", http.StatusBadRequest)
+			return
+		}
+		colStr = r.FormValue("col")
+	} else {
+		colStr = r.URL.Query().Get("col")
+	}
+
 	col, err := strconv.Atoi(colStr)
 	if err != nil {
 		http.Error(w, "Colonne invalide", http.StatusBadRequest)
