@@ -8,6 +8,7 @@ type Game struct {
 	PlayerColor2  string
 	Grid          [][]string
 	Winner        string
+	Mode          string
 }
 
 var GameInstance *Game
