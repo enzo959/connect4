@@ -161,3 +161,99 @@ func (g *Game) PlayMove(col int) {
 
 	// colonne pleine -> on ne fait rien
 }
+
+func (g *Game) AIMove() {
+	if g == nil || g.Winner != "" {
+		return
+	}
+
+	aiColor := g.PlayerColor2
+	playerColor := g.PlayerColor1
+
+	// 1. Bloquer l'adversaire
+	for c := 0; c < len(g.Grid[0]); c++ {
+		tempGrid := copyGrid(g.Grid)
+		if dropToken(tempGrid, c, playerColor) {
+			if checkWinnerGrid(tempGrid, playerColor) {
+				g.PlayMove(c) // bloquer le joueur
+				return
+			}
+		}
+	}
+
+	// 2. Tenter de gagner
+	for c := 0; c < len(g.Grid[0]); c++ {
+		tempGrid := copyGrid(g.Grid)
+		if dropToken(tempGrid, c, aiColor) {
+			if checkWinnerGrid(tempGrid, aiColor) {
+				g.PlayMove(c)
+				return
+			}
+		}
+	}
+
+	// 3. Aligner 2 ou 3 jetons : choisir centre si possible
+	center := len(g.Grid[0]) / 2
+	if g.Grid[0][center] == "" {
+		g.PlayMove(center)
+		return
+	}
+
+	// 4. Choisir première colonne vide
+	for c := 0; c < len(g.Grid[0]); c++ {
+		if g.Grid[0][c] == "" {
+			g.PlayMove(c)
+			return
+		}
+	}
+}
+
+func copyGrid(grid [][]string) [][]string {
+	rows := len(grid)
+	cols := len(grid[0])
+	newGrid := make([][]string, rows)
+	for r := 0; r < rows; r++ {
+		newGrid[r] = make([]string, cols)
+		for c := 0; c < cols; c++ {
+			newGrid[r][c] = grid[r][c]
+		}
+	}
+	return newGrid
+}
+
+func dropToken(grid [][]string, col int, color string) bool {
+	for r := len(grid) - 1; r >= 0; r-- {
+		if grid[r][col] == "" {
+			grid[r][col] = color
+			return true
+		}
+	}
+	return false
+}
+
+func checkWinnerGrid(grid [][]string, color string) bool {
+	rows := len(grid)
+	cols := len(grid[0])
+	dirs := [][2]int{{0, 1}, {1, 0}, {1, 1}, {1, -1}}
+
+	for r := 0; r < rows; r++ {
+		for c := 0; c < cols; c++ {
+			if grid[r][c] != color {
+				continue
+			}
+			for _, d := range dirs {
+				count := 1
+				nr, nc := r+d[0], c+d[1]
+				for nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr][nc] == color {
+					count++
+					if count == 4 {
+						return true
+					}
+					nr += d[0]
+					nc += d[1]
+				}
+			}
+		}
+	}
+	return false
+}
