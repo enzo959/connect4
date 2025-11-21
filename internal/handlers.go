@@ -2,10 +2,8 @@ package internal
 
 import (
 	"html/template"
-	"math/rand"
 	"net/http"
 	"strconv"
-	"time"
 )
 
 type StartPageData struct {
@@ -122,22 +120,10 @@ func PlayHandler(w http.ResponseWriter, r *http.Request) {
 
 	GameInstance.PlayMove(col)
 	if GameInstance.Mode == "solo" && GameInstance.CurrentPlayer == GameInstance.PlayerName2 && GameInstance.Winner == "" {
-		computerMove()
+		GameInstance.AIMove()
 	}
 
 	http.Redirect(w, r, "/game", http.StatusSeeOther)
-}
-
-func computerMove() {
-	cols := len(GameInstance.Grid[0])
-	rand.Seed(time.Now().UnixNano())
-	for {
-		col := rand.Intn(cols)
-		if GameInstance.Grid[0][col] == "" {
-			GameInstance.PlayMove(col)
-			break
-		}
-	}
 }
 
 // ResetHandler réinitialise la partie et redirige vers le formulaire d'accueil
