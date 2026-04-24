@@ -1,9 +1,9 @@
 package main
 
 import (
-	"Power4/internal"
 	"log"
 	"net/http"
+	"projet_connect4/internal"
 )
 
 func main() {
